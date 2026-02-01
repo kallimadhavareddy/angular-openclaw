@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AppConfig } from '../config/app.config';
 
 export enum Category {
   WORK = 'WORK',
@@ -40,9 +41,8 @@ export interface ToDoTasks {
 })
 export class TodoTaskService {
 
-  private todoTasksUrl = 'http://localhost:8080/api/todo/tasks';
-   private todoTasksCreateUrl = 'http://localhost:8080/api/todo/create';
-  private todoTasksUpdateUrl = 'http://localhost:8080/api/todo/update';
+  private todoTasksUrl = AppConfig.apiBaseUrl + AppConfig.endpoints.todo.tasks;
+  private todoTasksUpdateUrl = AppConfig.apiBaseUrl + AppConfig.endpoints.todo.update;
 
   constructor(private http: HttpClient) {}
 
@@ -54,11 +54,16 @@ export class TodoTaskService {
   }
 
   updateToDoTaskList(toDoTask: ToDoTasks): Observable<ToDoTasks> {
-   return this.http.post<ToDoTasks>(this.todoTasksUpdateUrl, toDoTask);
+    const headers = new HttpHeaders({
+      'X-API-Key': 'test-key-abcde',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put<ToDoTasks>(this.todoTasksUpdateUrl, toDoTask, { headers });
   }
 
   createDoTaskList(toDoTask: ToDoTasks): Observable<ToDoTasks> {
-   return this.http.post<ToDoTasks>(this.todoTasksCreateUrl, toDoTask);
+   return this.http.post<ToDoTasks>(AppConfig.apiBaseUrl + AppConfig.endpoints.todo.create, toDoTask);
   }
 
   

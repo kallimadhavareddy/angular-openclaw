@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AppConfig } from '../config/app.config';
 
 export enum Category {
   WORK = 'WORK',
@@ -45,7 +46,12 @@ export class ToDoTasks {
   constructor(private http: HttpClient) {}
 
   submitToDoTask() {
-    const apiUrl = 'http://localhost:8080/api/todo/create';
+    console.log('Submit button clicked!');
+    console.log('Form data:', this.todoTaskRequest);
+    
+    const apiUrl = AppConfig.apiBaseUrl + AppConfig.endpoints.todo.create;
+    console.log('Calling API:', apiUrl);
+    
     /*const headers = new HttpHeaders({
       'X-API-Key': 'test-key-abcde',
       'Content-Type': 'application/json'
@@ -55,7 +61,7 @@ export class ToDoTasks {
     this.http.post(apiUrl, this.todoTaskRequest).subscribe({
       next: (res) => {
         console.log('Todo created', res);
-        alert("Hi")
+        alert("Task created successfully!")
 
         // reset form model
         this.todoTaskRequest = {
@@ -69,7 +75,10 @@ export class ToDoTasks {
           dueDate: ''
         };
       },
-      error: err => console.error(err)
+      error: err => {
+        console.error('Error creating task:', err);
+        alert('Error creating task. Check console for details.');
+      }
     });
   }
 }
