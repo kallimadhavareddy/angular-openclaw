@@ -1,0 +1,52 @@
+<div class="drag-container">
+  <h2>Task Board</h2>
+  <div class="task-board">
+<ng-template #loading>
+  <p>Loading tasks...</p>
+</ng-template>
+    <div cdkDropList 
+         id="todoList"
+         [cdkDropListData]="todo" 
+         (cdkDropListDropped)="drop($event)"
+         [cdkDropListConnectedTo]="[doneList]"
+         #todoList="cdkDropList"
+         class="task-column">
+      <h3>Todo</h3>
+      <div class="task-list">
+        <div *ngFor="let item of todo" 
+             cdkDrag 
+             class="task-item">
+          <div class="task-content">
+            <svg class="drag-handle" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M3 15h18v-2H3v2zm0 4h18v-2H3v2zm0-8h18V9H3v2zm0-6v2h18V5H3z" fill="currentColor"/>
+            </svg>
+            {{ item.id.category }}-{{ item.id.taskName }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div cdkDropList 
+         id="doneList"
+         [cdkDropListData]="done" 
+         (cdkDropListDropped)="drop($event)"
+         [cdkDropListConnectedTo]="[todoList]"
+         #doneList="cdkDropList"
+         class="task-column">
+      <h3>Done</h3>
+      <div class="task-list">
+        <div *ngFor="let item of done" 
+             cdkDrag 
+             class="task-item completed">
+          <div class="task-content">
+            <svg class="drag-handle" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M3 15h18v-2H3v2zm0 4h18v-2H3v2zm0-8h18V9H3v2zm0-6v2h18V5H3z" fill="currentColor"/>
+            </svg>
+            {{ item.id.taskName }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<main class="main">
+  <header class="header">
+    <h1>Aaksh Kalli. API Call</h1>
+    <p class="subtitle">Fetching posts from Asynchronous Spring Boot API</p>
+  </header>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <nav class="side-menu">
+        <div class="menu-header">
+          <h3>Actions</h3>
+        </div>
+
+        <menu class="actions"></menu>
+
+        <div class="menu-section">
+          <h4>User Management</h4>
+          <app-to-do-tasks></app-to-do-tasks>
+        </div>
+      </nav>
+    </aside>
+
+    <section class="main-content">
+      <div class="error" *ngIf="error()">
+        <strong>Error:</strong> {{ error() }}
+      </div>
+
+      <h1>Todo</h1>
+      <app-drag-and-drop></app-drag-and-drop>
+
+      <div class="dashboard">
+        <div class="card loading-card" *ngIf="loading()">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading data...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<router-outlet></router-outlet>

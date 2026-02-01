@@ -1,0 +1,67 @@
+{
+  "hash": "916d2ead",
+  "configHash": "0e1a49ff",
+  "lockfileHash": "2c714700",
+  "browserHash": "aceb501e",
+  "optimized": {
+    "@angular/cdk/drag-drop": {
+      "src": "../../../../../../node_modules/@angular/cdk/fesm2022/drag-drop.mjs",
+      "file": "@angular_cdk_drag-drop.js",
+      "fileHash": "8b80fa03",
+      "needsInterop": false
+    },
+    "@angular/common": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "8349d4b8",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "c384c95e",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "97c98448",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "2eb5f85d",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "eaf704b8",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "27bd113f",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-6U6LEBE4": {
+      "file": "chunk-6U6LEBE4.js"
+    },
+    "chunk-QONQQRQ4": {
+      "file": "chunk-QONQQRQ4.js"
+    },
+    "chunk-PVVLXZMR": {
+      "file": "chunk-PVVLXZMR.js"
+    },
+    "chunk-3DDV7RNF": {
+      "file": "chunk-3DDV7RNF.js"
+    },
+    "chunk-PDINX5NC": {
+      "file": "chunk-PDINX5NC.js"
+    }
+  }
+}

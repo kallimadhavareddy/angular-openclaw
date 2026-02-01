@@ -1,0 +1,58 @@
+<form>
+  <h1>Create Todo Task</h1>
+
+  <input
+    name="taskName"
+    [(ngModel)]="todoTaskRequest.id.taskName"
+    [ngModelOptions]="{ standalone: true }"
+    placeholder="Task name"
+  />
+
+  <input
+    name="description"
+    [(ngModel)]="todoTaskRequest.description"
+    [ngModelOptions]="{ standalone: true }"
+    placeholder="Description"
+  />
+
+  <select
+    name="category"
+    [(ngModel)]="todoTaskRequest.id.category"
+    [ngModelOptions]="{ standalone: true }"
+  >
+    <option value="WORK">Work</option>
+    <option value="HOME">Home</option>
+    <option value="SCHOOL">School</option>
+    <option value="OTHER">Other</option>
+  </select>
+
+  <select
+    name="status"
+    [(ngModel)]="todoTaskRequest.status"
+    [ngModelOptions]="{ standalone: true }"
+  >
+    <option value="OPEN">Open</option>
+    <option value="IN_PROGRESS">In Progress</option>
+    <option value="COMPLETED">Completed</option>
+    <option value="CANCELLED">Cancelled</option>
+  </select>
+
+  <select
+    name="priority"
+    [(ngModel)]="todoTaskRequest.priority"
+    [ngModelOptions]="{ standalone: true }"
+  >
+    <option value="HIGH">High</option>
+    <option value="MEDIUM">Medium</option>
+    <option value="LOW">Low</option>
+  </select>
+
+  <input
+    type="date"
+    name="dueDate"
+    [(ngModel)]="todoTaskRequest.dueDate"
+    [ngModelOptions]="{ standalone: true }"
+  />
+
+  <button type="button" (click)="submitToDoTask()">Create</button>
+</form>
