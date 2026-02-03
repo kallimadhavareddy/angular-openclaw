@@ -57,7 +57,7 @@ export class DragAndDrop implements OnInit {
        console.log('Task moved to done:', movedTask.id.taskName);
         movedTask.status = Status.COMPLETED;
         this.todoTaskService.updateToDoTaskList(movedTask).subscribe();
-      } else if (event.container.id === 'cdk-drop-list-1') {
+      } else if (event.container.id === 'todoList') {
         console.log('Task moved to todo:', movedTask.id.taskName);
         movedTask.status = Status.OPEN;
        this.todoTaskService.updateToDoTaskList(movedTask).subscribe();

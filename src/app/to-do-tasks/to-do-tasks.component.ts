@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { AppConfig } from '../config/app.config';
 
 export enum Category {
@@ -11,7 +12,7 @@ export enum Category {
 }
 
 export enum Priority {
-  HIGH = 'HIGH',
+  HIGH = 'HIGH',  
   MEDIUM = 'MEDIUM',
   LOW = 'LOW'
 }
@@ -26,7 +27,7 @@ export enum Status {
 @Component({
   selector: 'app-to-do-tasks',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './to-do-tasks.component.html',
   styleUrl: './to-do-tasks.component.css',
 })
@@ -40,12 +41,18 @@ export class ToDoTasks {
     description: '',
     status: 'OPEN',
     priority: 'HIGH',
-    dueDate: ''
+    dueDate: this.getToday()
   };
 
   constructor(private http: HttpClient) {}
 
-  submitToDoTask() {
+  submitToDoTask(form: NgForm) {
+    alert(form.invalid);
+    if (form.invalid) {
+      form.control.markAllAsTouched(); // <-- mark fields as touched
+    alert('Please fix errors before submitting.');
+      return;
+    }
     console.log('Submit button clicked!');
     console.log('Form data:', this.todoTaskRequest);
     
@@ -63,6 +70,8 @@ export class ToDoTasks {
         console.log('Todo created', res);
         alert("Task created successfully!")
 
+        form.resetForm(this.todoTaskRequest);
+
         // reset form model
         this.todoTaskRequest = {
           id: {
@@ -72,7 +81,7 @@ export class ToDoTasks {
           description: '',
           status: 'OPEN',
           priority: 'HIGH',
-          dueDate: ''
+          dueDate: this.getToday()
         };
       },
       error: err => {
@@ -80,5 +89,13 @@ export class ToDoTasks {
         alert('Error creating task. Check console for details.');
       }
     });
+  }
+
+  getToday(): string {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // months start at 0
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
   }
 }

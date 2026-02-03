@@ -1,58 +1,104 @@
-<form (ngSubmit)="submitToDoTask()">
+<form #taskForm="ngForm" (ngSubmit)="submitToDoTask(taskForm)">
   <h1>Create Todo Task</h1>
 
-  <input
-    name="taskName"
-    [(ngModel)]="todoTaskRequest.id.taskName"
-    [ngModelOptions]="{ standalone: true }"
-    placeholder="Task name"
-  />
+  <div>
+    <label for="taskName">Task Name *</label>
+    <input
+      id="taskName"
+      name="taskName"
+      [(ngModel)]="todoTaskRequest.id.taskName"
+      required
+      minlength="3"
+      #taskName="ngModel"
+      placeholder="Task name"
+    />
+    <div *ngIf="taskName.invalid && (taskName.dirty || taskName.touched)" class="error-message">
+      <div *ngIf="taskName.errors?.['required']">Task name is required</div>
+      <div *ngIf="taskName.errors?.['minlength']">Task name must be at least 3 characters</div>
+    </div>
+  </div>
 
-  <input
-    name="description"
-    [(ngModel)]="todoTaskRequest.description"
-    [ngModelOptions]="{ standalone: true }"
-    placeholder="Description"
-  />
+  <div>
+    <label for="description">Description</label>
+    <input
+      id="description"
+      name="description"
+      [(ngModel)]="todoTaskRequest.description"
+      #description="ngModel"
+      placeholder="Description"
+    />
+  </div>
 
-  <select
-    name="category"
-    [(ngModel)]="todoTaskRequest.id.category"
-    [ngModelOptions]="{ standalone: true }"
-  >
-    <option value="WORK">Work</option>
-    <option value="HOME">Home</option>
-    <option value="SCHOOL">School</option>
-    <option value="OTHER">Other</option>
-  </select>
+  <div>
+    <label for="category">Category</label>
+    <select
+      id="category"
+      name="category"
+      [(ngModel)]="todoTaskRequest.id.category"
+      required
+      #category="ngModel"
+    >
+      <option value="WORK">Work</option>
+      <option value="HOME">Home</option>
+      <option value="SCHOOL">School</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <div *ngIf="category.invalid && (category.dirty || category.touched)" class="error-message">
+      <div *ngIf="category.errors?.['required']">Category is required</div>
+    </div>
+  </div>
 
-  <select
-    name="status"
-    [(ngModel)]="todoTaskRequest.status"
-    [ngModelOptions]="{ standalone: true }"
-  >
-    <option value="OPEN">Open</option>
-    <option value="IN_PROGRESS">In Progress</option>
-    <option value="COMPLETED">Completed</option>
-    <option value="CANCELLED">Cancelled</option>
-  </select>
+  <div>
+    <label for="status">Status</label>
+    <select
+      id="status"
+      name="status"
+      [(ngModel)]="todoTaskRequest.status"
+      required
+      #status="ngModel"
+    >
+      <option value="OPEN">Open</option>
+      <option value="IN_PROGRESS">In Progress</option>
+      <option value="COMPLETED">Completed</option>
+      <option value="CANCELLED">Cancelled</option>
+    </select>
+    <div *ngIf="status.invalid && (status.dirty || status.touched)" class="error-message">
+      <div *ngIf="status.errors?.['required']">Status is required</div>
+    </div>
+  </div>
 
-  <select
-    name="priority"
-    [(ngModel)]="todoTaskRequest.priority"
-    [ngModelOptions]="{ standalone: true }"
-  >
-    <option value="HIGH">High</option>
-    <option value="MEDIUM">Medium</option>
-    <option value="LOW">Low</option>
-  </select>
+  <div>
+    <label for="priority">Priority</label>
+    <select
+      id="priority"
+      name="priority"
+      [(ngModel)]="todoTaskRequest.priority"
+      required
+      #priority="ngModel"
+    >
+      <option value="HIGH">High</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="LOW">Low</option>
+    </select>
+    <div *ngIf="priority.invalid && (priority.dirty || priority.touched)" class="error-message">
+      <div *ngIf="priority.errors?.['required']">Priority is required</div>
+    </div>
+  </div>
 
-  <input
-    type="date"
-    name="dueDate"
-    [(ngModel)]="todoTaskRequest.dueDate"
-    [ngModelOptions]="{ standalone: true }"
-  />
+  <div>
+    <label for="dueDate">Due Date *</label>
+    <input
+      id="dueDate"
+      type="date"
+      name="dueDate"
+      required
+      [(ngModel)]="todoTaskRequest.dueDate"
+      #dueDate="ngModel"
+    />
+    <div *ngIf="dueDate.invalid && (dueDate.dirty || dueDate.touched)" class="error-message">
+      <div *ngIf="dueDate.errors?.['required']">Due date is required</div>
+    </div>
+  </div>
 
-  <button type="submit">Create</button>
+  <button type="submit" [disabled]="taskForm.invalid">Create Task</button>
 </form>
